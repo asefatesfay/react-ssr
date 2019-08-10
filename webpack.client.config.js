@@ -31,7 +31,13 @@ module.exports = {
                 test: /\.scss$/,
                 use: [
                     {
-                        loader: MiniCssExtractPlugin.loader
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            // you can specify a publicPath here
+                            // by default it uses publicPath in webpackOptions.output
+                            publicPath: './public',
+                            hmr: process.env.NODE_ENV === 'development',
+                          },
                     },
                     "css-loader",
                     "sass-loader"
@@ -56,11 +62,11 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: [".js", ".json", ".jsx", ".css"]
+        extensions: [".js", ".json", ".jsx", ".css", ".scss"]
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: "style.css"
+            filename: "styles.css"
           }),
     ]
 };
